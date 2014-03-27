@@ -9,6 +9,8 @@ angular.module('project',[]).controller('Vote', function ($scope) {
 	$scope.blanco = 0;
 	$scope.threshold = 0;
 	
+	$scope.history = [];
+	
 	/** Options management */
 	$scope.saveOption = function () {
 		$scope.options.push({
@@ -33,10 +35,32 @@ angular.module('project',[]).controller('Vote', function ($scope) {
 	/* Vote */
 	$scope.vote = function (opt) {
 		opt.count++;
+		$scope.history.push({
+			type : 'vote',
+			obj : opt
+		});
+	};
+	
+	$scope.revert = function () {
+		var last = $scope.history.pop();
+		
+		if(last == null || last === undefined) {
+			return;
+		}
+		
+		if(last.type == 'vote') {
+			last.obj.count--;
+		} else if(last.type == 'blanco') {
+			$scope.blanco--;
+		}
 	};
 	
 	$scope.addBlanco = function () {
 		$scope.blanco++;
+		
+		$scope.history.push({
+			type : 'blanco'
+		});
 	};
 	
 	$scope.wh = function (opt) {
@@ -76,7 +100,7 @@ angular.module('project',[]).controller('Vote', function ($scope) {
 		$scope.threshold = Math.round((tot + 1) / (2 * $scope.validOptions),0);
 		
 		return {
-			bottom : 30 + ($scope.threshold / (max+3) * 400) + 'px'
+			bottom : 20 + ($scope.threshold / (max+3) * 400) + 'px'
 		};
 	};
 	
