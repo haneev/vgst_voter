@@ -1,11 +1,23 @@
 VGST Voter
 ==========
 
-A vote tool for the general meetings of the student union VGST
+Een tool voor live resultaten van een stemming.
+Bijvoorbeeld een verkiezing van een Bestuur/Senaat of een voorstel.
+
+![Screenshot](images/screenshot.png)
 
 ### Usage
-Just open the `index.html` and you are ready to go.
-The `uitkomst aantal` is for determining how much outcomes there must be. In a simple vote with yes and no you have one outcome. So this number will be one.
-In the case of a new Senaat this will be 4, because of the four outcomes. 
+Om te starten clone deze repo en klik op `index.html`.
+1. Vul in de titel
+2. Vul in de te kiezen opties
+3. Druk op start en gaan!
 
-Han van der Veen, 27 march 2014
+Kiesdeler wordt bepaald met de volgende formule 
+```
+kiesdeler = (aantal uitgebrachte stemmen - blanco) / (2 * te verkiezen opties) 
+
+te verkiezen opties is bij een voorstel 1, omdat er één uitkomst is. Bij verkiezen van een Senaat zijn er meerdere opties, in ons geval 4. Dus vul dan hier 4 in
+```
+
+Han van der Veen
+VGST
